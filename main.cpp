@@ -26,7 +26,7 @@ void openWindow() {
   ConvexShape stickman = getStickman();
   RectangleShape ground = getGround();
   while(window.isOpen()) {
-    sf::Event event;
+    Event event;
     while (window.pollEvent(event)) {
       if (event.type == Event::Closed)
         window.close();
@@ -48,6 +48,15 @@ void openWindow() {
 ConvexShape handleInput(Event event, ConvexShape stickman) {
   if (event.key.scancode == Keyboard::Scan::D) {
     stickman.move(10, 0);
+  }
+  if (event.key.scancode == Keyboard::Scan::A) {
+    stickman.move(-10, 0);
+  }
+  if (event.key.scancode == Keyboard::Scan::W) {
+    stickman.move(0, -10);
+  }
+  if (event.key.scancode == Keyboard::Scan::S) {
+    stickman.move(0, 10);
   }
   return stickman;
 }
