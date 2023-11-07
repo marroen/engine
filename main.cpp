@@ -4,6 +4,8 @@
 using namespace std;
 using namespace sf;
 
+const int GROUND_Y = 500;
+
 void openWindow();
 ConvexShape getStickman();
 RectangleShape getGround();
@@ -56,7 +58,8 @@ ConvexShape handleInput(Event event, ConvexShape stickman) {
     stickman.move(0, -10);
   }
   if (event.key.scancode == Keyboard::Scan::S) {
-    stickman.move(0, 10);
+    if (stickman.getPosition().y < (GROUND_Y - 17))
+      stickman.move(0, 10);
   }
   return stickman;
 }
@@ -75,7 +78,7 @@ ConvexShape getStickman() {
 
 RectangleShape getGround() {
   RectangleShape ground = RectangleShape(Vector2f(1700, 100));
-  ground.setPosition(0, 500);
+  ground.setPosition(0, GROUND_Y);
   ground.setFillColor(Color::Green);
   return ground;
 }
