@@ -4,13 +4,14 @@ project(engine LANGUAGES CXX)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR})
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 
+# Including SFML as part of build, avoiding end user dependency on SFML
 include(FetchContent)
 FetchContent_Declare(SFML
     GIT_REPOSITORY https://github.com/SFML/SFML.git
     GIT_TAG 2.6.x)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(engine main.cpp)
+add_executable(engine src/main.cpp src/logic.cpp)
 target_link_libraries(engine PRIVATE sfml-graphics)
 target_compile_features(engine PRIVATE cxx_std_17)
 
