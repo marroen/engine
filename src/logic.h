@@ -6,6 +6,8 @@ using namespace std;
 using namespace sf;
 
 void openWindow();
-ConvexShape getStickman();
-RectangleShape getGround(); // TODO: static
-ConvexShape handleInput(Event event, ConvexShape stickman);
+ConvexShape createStickman();
+RectangleShape createGround(); // TODO: static
+RectangleShape createWall();
+Keyboard::Scan::Scancode reverseKeyPressedEvent(Keyboard::Scan::Scancode scancode);
+ConvexShape handleInput(Keyboard::Scan::Scancode scancode, ConvexShape stickman);
