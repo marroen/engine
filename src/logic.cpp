@@ -16,10 +16,12 @@ void openWindow() {
   }
   Text text("Hello", font, 50);
   ConvexShape stickman = createStickman();
+  ConvexShape npc = createNPC();
   RectangleShape ground = createGround();
   RectangleShape wall = createWall();
   while(window.isOpen()) {
     Event event;
+    npc = randomMove(npc);
     while (window.pollEvent(event)) {
       if (event.type == Event::Closed)
         window.close();
@@ -38,6 +40,7 @@ void openWindow() {
     window.clear();
     window.draw(text);
     window.draw(stickman);
+    window.draw(npc);
     window.draw(ground);
     window.draw(wall);
     window.display();
@@ -81,6 +84,27 @@ ConvexShape handleInput(Keyboard::Scan::Scancode scancode, ConvexShape stickman)
   return stickman;
 }
 
+ConvexShape randomMove(ConvexShape npc) {
+  int i = rand() % 4;
+  switch(i) {
+    case 0:
+      npc.move(10, 0);
+      break;
+    case 1:
+      npc.move(-10, 0);
+      break;
+    case 2:
+      npc.move(0, -10);
+      break;
+    case 3:
+      if (npc.getPosition().y < (GROUND_Y - 17))
+        npc.move(0, 10);
+      break;
+  }
+
+  return npc;
+}
+
 ConvexShape createStickman() {
   ConvexShape polygon = ConvexShape(3);
   polygon.setPoint(0, Vector2f(0, 0));
@@ -90,6 +114,18 @@ ConvexShape createStickman() {
   polygon.setOutlineThickness(5);
   polygon.setFillColor(Color::Red);
   polygon.setPosition(700, 483);
+  return polygon;
+}
+
+ConvexShape createNPC() {
+  ConvexShape polygon = ConvexShape(3);
+  polygon.setPoint(0, Vector2f(0, 0));
+  polygon.setPoint(1, Vector2f(0, 10));
+  polygon.setPoint(2, Vector2f(25, 5));
+  polygon.setOutlineColor(Color::Red);
+  polygon.setOutlineThickness(5);
+  polygon.setFillColor(Color::Red);
+  polygon.setPosition(300, 483);
   return polygon;
 }
 
