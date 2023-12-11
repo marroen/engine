@@ -8,7 +8,7 @@ using namespace sf;
 void openWindow();
 ConvexShape createStickman();
 ConvexShape createNPC();
-RectangleShape createGround(); // TODO: static
+RectangleShape createGround();
 RectangleShape createWall();
 Keyboard::Scan::Scancode reverseKeyPressedEvent(Keyboard::Scan::Scancode scancode);
 ConvexShape handleInput(Keyboard::Scan::Scancode scancode, ConvexShape stickman);
